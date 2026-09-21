@@ -1,16 +1,18 @@
 === Sticky Notes Everywhere ===
 Contributors: ahmadrezaebrahimi
 Tags: notes, sticky-notes, dashboard, productivity, admin
-Requires at least: 6.0
+Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Private, draggable sticky notes on every frontend page and inside wp-admin. Each user only sees their own notes.
+Private, draggable sticky notes on every frontend page and inside wp-admin. Requires WordPress 6.5 or later. Each user only sees their own notes.
 
 == Description ==
+
+This plugin requires WordPress 6.5 or later. It uses WordPress 6.5 performant PHP translation files (`.l10n.php`).
 
 Sticky Notes Everywhere lets logged-in users pin private notes onto any page of the site, including wp-admin.
 
@@ -33,6 +35,8 @@ JavaScript and CSS ship inside the plugin. Source is unminified so it stays huma
 Source and build notes: https://github.com/ahmadreza-log/sticky-notes-everywhere
 
 == Installation ==
+
+Requires WordPress 6.5 or later.
 
 1. Upload the `sticky-notes-everywhere` folder to `/wp-content/plugins/`.
 2. Activate the plugin through the Plugins screen.
@@ -64,6 +68,10 @@ No. Notes are stored in your WordPress database. A hide/show preference is store
 
 Uncheck “Show on the public site” under Settings → Sticky Notes. You can also hide notes for yourself with the eye button.
 
+= Why does this plugin require WordPress 6.5? =
+
+Translations ship as WordPress 6.5 PHP files (`.l10n.php`) next to the `.po` sources. WordPress 6.5 or later is required to load them.
+
 == Privacy ==
 
 This plugin does not track users, does not load remote scripts or fonts, and does not contact third-party servers.
@@ -73,6 +81,10 @@ It stores note title, body, color, position, and the page path in a custom table
 The optional hide-notes preference uses `localStorage` in the user’s browser and never leaves that browser.
 
 == Changelog ==
+
+= 1.3.0 =
+* Require WordPress 6.5 or later.
+* Load translations from `.l10n.php` (WordPress 6.5 performant translations). Keep `.pot` / `.po` for translators.
 
 = 1.2.0 =
 * Use single-word class, method, variable, and REST keys. Settings keys: frontend, admin, max, roles.
@@ -89,6 +101,9 @@ The optional hide-notes preference uses `localStorage` in the user’s browser a
 
 == Upgrade Notice ==
 
+= 1.3.0 =
+Requires WordPress 6.5 or later for PHP translation files.
+
 = 1.2.0 =
 REST and settings keys are now single words. Existing notes and options are migrated automatically.
 
@@ -98,3 +113,5 @@ Settings move to Settings → Sticky Notes. The all-notes list moves to Tools �
 == Source ==
 
 JavaScript and CSS are included unminified in `public/` and `admin/`.
+
+Translations: edit `languages/*.po`, then generate `languages/*.l10n.php` with `wp i18n make-php languages`. WordPress 6.5 or later loads the PHP files.

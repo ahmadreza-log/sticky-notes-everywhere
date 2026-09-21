@@ -2,7 +2,9 @@
 
 Private, draggable sticky notes for WordPress (frontend and wp-admin). Each logged-in user only sees their own notes.
 
-Requires WordPress 6.0+ and PHP 8.0+. License: GPL-2.0-or-later (`license.txt`).
+**Requires WordPress 6.5 or later** and PHP 8.0+. License: GPL-2.0-or-later (`license.txt`).
+
+Translations use WordPress 6.5 PHP files (`.l10n.php`). Translators edit `.po`; `wp i18n make-php` builds the PHP files WordPress loads.
 
 See **readme.txt** for the WordPress.org description, installation, FAQ, and changelog.
 

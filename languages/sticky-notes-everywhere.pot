@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Sticky Notes Everywhere plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Sticky Notes Everywhere 1.2.0\n"
+"Project-Id-Version: Sticky Notes Everywhere 1.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/ahmadreza-log/sticky-notes-everywhere/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,14 @@ msgstr ""
 "X-Generator: WordPress\n"
 "X-Domain: sticky-notes-everywhere\n"
 
+#: sticky-notes-everywhere.php
+msgid "Sticky Notes Everywhere requires WordPress 6.5 or later."
+msgstr ""
+
+#: sticky-notes-everywhere.php
+msgid "Plugin activation error"
+msgstr ""
+
 #. Plugin Name of the plugin
 #: sticky-notes-everywhere.php
 msgid "Sticky Notes Everywhere"
@@ -22,7 +30,7 @@ msgstr ""
 
 #. Description of the plugin
 #: sticky-notes-everywhere.php
-msgid "Private, draggable sticky notes on every frontend page and in wp-admin."
+msgid "Private, draggable sticky notes on every frontend page and in wp-admin. Requires WordPress 6.5 or later."
 msgstr ""
 
 #. Author of the plugin
