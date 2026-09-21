@@ -1,0 +1,38 @@
+/**
+ * Sticky Notes Everywhere — Tools / Settings screens only.
+ */
+
+/* Color chip in the notes list table. */
+.sne-admin .sne-swatch {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  vertical-align: middle;
+}
+
+/* Page paths stay LTR even in a RTL admin. */
+.sne-admin .description code {
+  font-size: 11px;
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+
+.sne-settings .form-table td label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 3px 0;
+  text-align: start;
+}
+
+.rtl .sne-admin .wp-list-table .column-color {
+  text-align: start;
+}
+
+/* Keep table labels on the start edge in RTL admin. */
+.rtl .sne-settings .form-table th {
+  text-align: start;
+}

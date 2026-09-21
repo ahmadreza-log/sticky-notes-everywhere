@@ -1,0 +1,258 @@
+# Copyright (C) 2026 Ahmadreza Ebrahimi
+# This file is distributed under the same license as the Sticky Notes Everywhere plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Sticky Notes Everywhere 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/ahmadreza-log/sticky-notes-everywhere/issues\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-21T16:00:00+03:30\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WordPress\n"
+"X-Domain: sticky-notes-everywhere\n"
+
+#. Plugin Name of the plugin
+#: sticky-notes-everywhere.php
+msgid "Sticky Notes Everywhere"
+msgstr ""
+
+#. Description of the plugin
+#: sticky-notes-everywhere.php
+msgid "Private, draggable sticky notes on every frontend page and in wp-admin."
+msgstr ""
+
+#. Author of the plugin
+#: sticky-notes-everywhere.php
+msgid "Ahmadreza Ebrahimi"
+msgstr ""
+
+#: includes/Admin.php:73
+#: includes/Admin.php:74
+#: includes/Admin.php:81
+#: includes/Admin.php:82
+msgid "Sticky Notes"
+msgstr ""
+
+#: includes/Admin.php:101
+msgid "Notes per page"
+msgstr ""
+
+#: includes/Admin.php:202
+msgid "%d note deleted."
+msgid_plural "%d notes deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Admin.php:208
+msgid "Private notes users pinned on the site. Deleting a row removes it for that user."
+msgstr ""
+
+#: includes/Admin.php:210
+msgid "Settings"
+msgstr ""
+
+#: includes/Admin.php:215
+msgid "Search notes"
+msgstr ""
+
+#: includes/Admin.php:235
+msgid "Sticky Notes settings"
+msgstr ""
+
+#: includes/Admin.php:238
+msgid "All Notes"
+msgstr ""
+
+#: includes/Admin.php:246
+msgid "Where notes appear"
+msgstr ""
+
+#: includes/Admin.php:251
+msgid "Show on the public site"
+msgstr ""
+
+#: includes/Admin.php:256
+msgid "Show inside wp-admin"
+msgstr ""
+
+#: includes/Admin.php:263
+msgid "Maximum notes per user"
+msgstr ""
+
+#: includes/Admin.php:270
+msgid "Allowed roles"
+msgstr ""
+
+#: includes/Admin.php:280
+msgid "Only logged-in users with a checked role can create and see their own notes."
+msgstr ""
+
+#: includes/Admin.php:285
+msgid "Save settings"
+msgstr ""
+
+#: includes/Admin.php:298
+msgid "Forbidden"
+msgstr ""
+
+#: includes/Rest.php:141
+#, php-format
+msgid "You have reached the maximum of %d notes."
+msgstr ""
+
+#: includes/Rest.php:152
+msgid "Could not create the note."
+msgstr ""
+
+#: includes/Rest.php:176
+msgid "Could not update the note."
+msgstr ""
+
+#: includes/Rest.php:212
+msgid "Note not found."
+msgstr ""
+
+#: includes/Rest.php:221
+msgid "You cannot edit this note."
+msgstr ""
+
+#: includes/Plugin.php:147
+msgid "New note"
+msgstr ""
+
+#: includes/Plugin.php:148
+msgid "All notes"
+msgstr ""
+
+#: includes/Plugin.php:149
+msgid "Hide notes"
+msgstr ""
+
+#: includes/Plugin.php:150
+msgid "Show notes"
+msgstr ""
+
+#: includes/Plugin.php:151
+msgid "Title"
+msgstr ""
+
+#: includes/Plugin.php:152
+msgid "Write a note…"
+msgstr ""
+
+#: includes/Plugin.php:153
+#: includes/Table.php:181
+msgid "Untitled note"
+msgstr ""
+
+#: includes/Plugin.php:154
+#: includes/Table.php:103
+#: includes/Table.php:220
+msgid "This page"
+msgstr ""
+
+#: includes/Plugin.php:155
+#: includes/Table.php:104
+#: includes/Table.php:219
+msgid "Everywhere"
+msgstr ""
+
+#: includes/Plugin.php:156
+msgid "Show on every page"
+msgstr ""
+
+#: includes/Plugin.php:157
+msgid "Show only on this page"
+msgstr ""
+
+#: includes/Plugin.php:158
+msgid "Minimize"
+msgstr ""
+
+#: includes/Plugin.php:159
+msgid "Restore"
+msgstr ""
+
+#: includes/Plugin.php:160
+#: includes/Table.php:49
+msgid "Color"
+msgstr ""
+
+#: includes/Plugin.php:161
+#: includes/Table.php:81
+#: includes/Table.php:199
+msgid "Delete"
+msgstr ""
+
+#: includes/Plugin.php:162
+#: includes/Table.php:198
+msgid "Delete this note?"
+msgstr ""
+
+#: includes/Plugin.php:163
+msgid "No notes yet. Click + to add one."
+msgstr ""
+
+#: includes/Plugin.php:164
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: includes/Plugin.php:165
+msgid "Drag the top bar to move this note."
+msgstr ""
+
+#: includes/Plugin.php:166
+msgid "Open page"
+msgstr ""
+
+#: includes/Plugin.php:167
+msgid "Close"
+msgstr ""
+
+#: includes/Table.php:50
+msgid "Note"
+msgstr ""
+
+#: includes/Table.php:51
+msgid "Scope"
+msgstr ""
+
+#: includes/Table.php:52
+msgid "Page"
+msgstr ""
+
+#: includes/Table.php:53
+msgid "User"
+msgstr ""
+
+#: includes/Table.php:54
+msgid "Updated"
+msgstr ""
+
+#: includes/Table.php:100
+msgid "Filter by scope"
+msgstr ""
+
+#: includes/Table.php:102
+msgid "All scopes"
+msgstr ""
+
+#: includes/Table.php:106
+msgid "Filter by user"
+msgstr ""
+
+#: includes/Table.php:107
+msgid "User ID"
+msgstr ""
+
+#: includes/Table.php:108
+msgid "Filter"
+msgstr ""
+
+#: includes/Table.php:294
+msgid "No sticky notes found."
+msgstr ""

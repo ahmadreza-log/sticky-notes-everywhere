@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Sticky Notes Everywhere">
+  <rect width="256" height="256" rx="48" fill="#1a1a22"/>
+  <g transform="rotate(-6 128 128)">
+    <rect x="52" y="48" width="152" height="160" rx="6" fill="#fff3a3"/>
+    <rect x="52" y="48" width="152" height="28" fill="#f5e06a"/>
+    <path d="M72 100h112M72 124h112M72 148h88M72 172h96" stroke="#3d3420" stroke-width="4" stroke-linecap="round" opacity="0.35"/>
+  </g>
+  <circle cx="128" cy="52" r="14" fill="#c62828"/>
+  <rect x="124" y="20" width="8" height="36" rx="2" fill="#8e1d1d"/>
+</svg>
