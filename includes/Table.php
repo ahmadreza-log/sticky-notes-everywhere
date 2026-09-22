@@ -93,8 +93,8 @@ final class Table extends \WP_List_Table
             return;
         }
 
-        $scope = isset($_GET['stne_scope']) ? sanitize_key((string) wp_unslash($_GET['stne_scope'])) : '';
-        $user  = isset($_GET['stne_user']) ? absint(wp_unslash($_GET['stne_user'])) : 0;
+        $scope = sanitize_key((string) filter_input(INPUT_GET, 'stne_scope', FILTER_UNSAFE_RAW));
+        $user  = absint(filter_input(INPUT_GET, 'stne_user', FILTER_VALIDATE_INT));
         ?>
         <div class="alignleft actions">
             <label class="screen-reader-text" for="stne-filter-scope"><?php esc_html_e('Filter by scope', 'sticky-notes-everywhere'); ?></label>
@@ -116,11 +116,19 @@ final class Table extends \WP_List_Table
     public function prepare_items(): void
     {
         $limit   = $this->get_items_per_page('stne_notes_per_page', 20);
-        $orderby = isset($_GET['orderby']) ? sanitize_key((string) wp_unslash($_GET['orderby'])) : 'updated';
-        $order   = isset($_GET['order']) ? strtolower(sanitize_text_field((string) wp_unslash($_GET['order']))) : 'desc';
-        $search  = isset($_GET['s']) ? sanitize_text_field((string) wp_unslash($_GET['s'])) : '';
-        $scope   = isset($_GET['stne_scope']) ? sanitize_key((string) wp_unslash($_GET['stne_scope'])) : '';
-        $user    = isset($_GET['stne_user']) ? absint(wp_unslash($_GET['stne_user'])) : 0;
+        $orderby = sanitize_key((string) filter_input(INPUT_GET, 'orderby', FILTER_UNSAFE_RAW));
+        $order   = strtolower(sanitize_text_field((string) filter_input(INPUT_GET, 'order', FILTER_UNSAFE_RAW)));
+        $search  = sanitize_text_field((string) filter_input(INPUT_GET, 's', FILTER_UNSAFE_RAW));
+        $scope   = sanitize_key((string) filter_input(INPUT_GET, 'stne_scope', FILTER_UNSAFE_RAW));
+        $user    = absint(filter_input(INPUT_GET, 'stne_user', FILTER_VALIDATE_INT));
+
+        if ($orderby === '') {
+            $orderby = 'updated';
+        }
+
+        if ($order === '') {
+            $order = 'desc';
+        }
 
         $result = Store::query(array(
             'search'  => $search,

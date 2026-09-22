@@ -18,6 +18,9 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+// dbDelta, SHOW TABLES, and a one-time RENAME of this plugin's table.
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
+
 /**
  * Install and upgrade the notes table.
  */

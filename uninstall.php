@@ -12,16 +12,25 @@ if (! defined('WP_UNINSTALL_PLUGIN')) {
     exit;
 }
 
-global $wpdb;
+/**
+ * Drop this plugin's tables. Local variables stay inside the function.
+ */
+function stne_uninstall(): void
+{
+    global $wpdb;
 
-$tables = array(
-    $wpdb->prefix . 'stne_notes',
-    $wpdb->prefix . 'sne_notes',
-);
+    $tables = array(
+        $wpdb->prefix . 'stne_notes',
+        $wpdb->prefix . 'sne_notes',
+    );
 
-foreach ($tables as $table) {
-    $wpdb->query('DROP TABLE IF EXISTS `' . esc_sql($table) . '`'); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+    foreach ($tables as $table) {
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.NotPrepared
+        $wpdb->query('DROP TABLE IF EXISTS `' . esc_sql($table) . '`');
+    }
 }
+
+stne_uninstall();
 
 delete_option('stne_settings');
 delete_option('stne_db_version');

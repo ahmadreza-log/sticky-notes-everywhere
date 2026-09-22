@@ -11,7 +11,7 @@ return array(
 	'x-generator'               => 'WordPress 6.5 PHP translations',
 	'translation-revision-date' => '2026-09-21 16:42+0330',
 	'plural-forms'              => 'nplurals=2; plural=(n > 1);',
-	'project-id-version'        => 'Sticky Notes Everywhere 1.3.0',
+	'project-id-version'        => 'Sticky Notes Everywhere 1.3.1',
 	'language'                  => 'fa_IR',
 	'messages'                  => array(
 		'Sticky Notes Everywhere requires WordPress 6.5 or later.' => 'افزونه Sticky Notes Everywhere به وردپرس ۶.۵ یا جدیدتر نیاز دارد.',

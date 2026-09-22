@@ -116,11 +116,9 @@ final class Admin
             return;
         }
 
-        $raw    = isset($_REQUEST['action']) ? wp_unslash($_REQUEST['action']) : '';
-        $second = isset($_REQUEST['action2']) ? wp_unslash($_REQUEST['action2']) : '';
-        $action = is_string($raw) && $raw !== '-1'
-            ? sanitize_key($raw)
-            : sanitize_key((string) $second);
+        $raw    = isset($_REQUEST['action']) ? sanitize_key(wp_unslash($_REQUEST['action'])) : '';
+        $second = isset($_REQUEST['action2']) ? sanitize_key(wp_unslash($_REQUEST['action2'])) : '';
+        $action = $raw !== '' && $raw !== '-1' ? $raw : $second;
 
         if (isset($_REQUEST['filter_action']) || $action !== 'delete') {
             return;
@@ -191,7 +189,8 @@ final class Admin
 
         $table = new Table();
         $table->prepare_items();
-        $count = isset($_GET['deleted']) ? absint(wp_unslash($_GET['deleted'])) : 0;
+        $deleted = filter_input(INPUT_GET, 'deleted', FILTER_VALIDATE_INT);
+        $count   = is_int($deleted) ? $deleted : 0;
         ?>
         <div class="wrap sne-admin">
             <h1><?php esc_html_e('Sticky Notes Everywhere', 'sticky-notes-everywhere'); ?></h1>

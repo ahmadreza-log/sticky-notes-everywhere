@@ -18,6 +18,9 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+// Custom table. WordPress has no API for these rows.
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+
 /**
  * Database access for notes.
  */
@@ -32,15 +35,15 @@ final class Store
     {
         global $wpdb;
 
-        $table = Database::table();
-        $path  = self::path($path);
-        $sql   = $wpdb->prepare(
-            "SELECT * FROM {$table} WHERE user_id = %d AND (scope = 'global' OR (scope = 'page' AND page_path = %s)) ORDER BY z_index ASC, id ASC",
-            $user,
-            $path
+        $path = self::path($path);
+        $rows = $wpdb->get_results(
+            $wpdb->prepare(
+                'SELECT * FROM `' . esc_sql($wpdb->prefix . 'stne_notes') . '` WHERE user_id = %d AND (scope = \'global\' OR (scope = \'page\' AND page_path = %s)) ORDER BY z_index ASC, id ASC',
+                $user,
+                $path
+            ),
+            ARRAY_A
         );
-
-        $rows = $wpdb->get_results($sql, ARRAY_A);
 
         return array_map(array(self::class, 'cast'), is_array($rows) ? $rows : array());
     }
@@ -54,13 +57,13 @@ final class Store
     {
         global $wpdb;
 
-        $table = Database::table();
-        $sql   = $wpdb->prepare(
-            "SELECT * FROM {$table} WHERE user_id = %d ORDER BY updated_at DESC, id DESC",
-            $user
+        $rows = $wpdb->get_results(
+            $wpdb->prepare(
+                'SELECT * FROM `' . esc_sql($wpdb->prefix . 'stne_notes') . '` WHERE user_id = %d ORDER BY updated_at DESC, id DESC',
+                $user
+            ),
+            ARRAY_A
         );
-
-        $rows = $wpdb->get_results($sql, ARRAY_A);
 
         return array_map(array(self::class, 'cast'), is_array($rows) ? $rows : array());
     }
@@ -72,10 +75,11 @@ final class Store
     {
         global $wpdb;
 
-        $table = Database::table();
-
         return (int) $wpdb->get_var(
-            $wpdb->prepare("SELECT COUNT(*) FROM {$table} WHERE user_id = %d", $user)
+            $wpdb->prepare(
+                'SELECT COUNT(*) FROM `' . esc_sql($wpdb->prefix . 'stne_notes') . '` WHERE user_id = %d',
+                $user
+            )
         );
     }
 
@@ -88,9 +92,11 @@ final class Store
     {
         global $wpdb;
 
-        $table = Database::table();
-        $row   = $wpdb->get_row(
-            $wpdb->prepare("SELECT * FROM {$table} WHERE id = %d", $id),
+        $row = $wpdb->get_row(
+            $wpdb->prepare(
+                'SELECT * FROM `' . esc_sql($wpdb->prefix . 'stne_notes') . '` WHERE id = %d',
+                $id
+            ),
             ARRAY_A
         );
 
@@ -204,18 +210,26 @@ final class Store
     {
         global $wpdb;
 
-        $ids = array_values(array_filter(array_map('intval', $ids)));
+        $ids = array_values(array_filter(array_map('absint', $ids)));
         if ($ids === array()) {
             return 0;
         }
 
-        $table = Database::table();
-        $in    = implode(',', array_fill(0, count($ids), '%d'));
-        $sql   = $wpdb->prepare("DELETE FROM {$table} WHERE id IN ({$in})", ...$ids); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $count = 0;
 
-        $count = $wpdb->query($sql);
+        foreach ($ids as $id) {
+            $deleted = $wpdb->delete(
+                $wpdb->prefix . 'stne_notes',
+                array('id' => $id),
+                array('%d')
+            );
 
-        return is_int($count) ? $count : 0;
+            if ($deleted) {
+                $count += (int) $deleted;
+            }
+        }
+
+        return $count;
     }
 
     /**
@@ -228,9 +242,6 @@ final class Store
     {
         global $wpdb;
 
-        $table   = Database::table();
-        $where   = array('1=1');
-        $params  = array();
         $search  = isset($args['search']) ? trim((string) $args['search']) : '';
         $user    = isset($args['user']) ? (int) $args['user'] : 0;
         $scope   = isset($args['scope']) ? sanitize_key((string) $args['scope']) : '';
@@ -256,36 +267,43 @@ final class Store
         }
         $column = $columns[$orderby];
 
-        if ($user > 0) {
-            $where[]  = 'user_id = %d';
-            $params[] = $user;
-        }
+        $useron  = $user > 0 ? 1 : 0;
+        $scopeon = in_array($scope, array('page', 'global'), true) ? 1 : 0;
+        $needle  = $scopeon === 1 ? $scope : '';
+        $findon = $search !== '' ? 1 : 0;
+        $like   = $findon === 1 ? '%' . $wpdb->esc_like($search) . '%' : '';
+        $total  = (int) $wpdb->get_var(
+            $wpdb->prepare(
+                'SELECT COUNT(*) FROM `' . esc_sql($wpdb->prefix . 'stne_notes') . '` WHERE (%d = 0 OR user_id = %d) AND (%d = 0 OR scope = %s) AND (%d = 0 OR title LIKE %s OR content LIKE %s OR page_title LIKE %s OR page_path LIKE %s)',
+                $useron,
+                $user,
+                $scopeon,
+                $needle,
+                $findon,
+                $like,
+                $like,
+                $like,
+                $like
+            )
+        );
 
-        if (in_array($scope, array('page', 'global'), true)) {
-            $where[]  = 'scope = %s';
-            $params[] = $scope;
-        }
-
-        if ($search !== '') {
-            $like     = '%' . $wpdb->esc_like($search) . '%';
-            $where[]  = '(title LIKE %s OR content LIKE %s OR page_title LIKE %s OR page_path LIKE %s)';
-            $params[] = $like;
-            $params[] = $like;
-            $params[] = $like;
-            $params[] = $like;
-        }
-
-        $clause = implode(' AND ', $where);
-        $count  = "SELECT COUNT(*) FROM {$table} WHERE {$clause}";
-        $select = "SELECT * FROM {$table} WHERE {$clause} ORDER BY {$column} {$order} LIMIT %d OFFSET %d";
-
-        $total = (int) ($params !== array()
-            ? $wpdb->get_var($wpdb->prepare($count, ...$params))
-            : $wpdb->get_var($count));
-
-        $params[] = $limit;
-        $params[] = $offset;
-        $rows     = $wpdb->get_results($wpdb->prepare($select, ...$params), ARRAY_A);
+        $rows = $wpdb->get_results(
+            $wpdb->prepare(
+                'SELECT * FROM `' . esc_sql($wpdb->prefix . 'stne_notes') . '` WHERE (%d = 0 OR user_id = %d) AND (%d = 0 OR scope = %s) AND (%d = 0 OR title LIKE %s OR content LIKE %s OR page_title LIKE %s OR page_path LIKE %s) ORDER BY `' . esc_sql($column) . '` ' . esc_sql($order) . ' LIMIT %d OFFSET %d',
+                $useron,
+                $user,
+                $scopeon,
+                $needle,
+                $findon,
+                $like,
+                $like,
+                $like,
+                $like,
+                $limit,
+                $offset
+            ),
+            ARRAY_A
+        );
 
         return array(
             'items' => array_map(array(self::class, 'cast'), is_array($rows) ? $rows : array()),

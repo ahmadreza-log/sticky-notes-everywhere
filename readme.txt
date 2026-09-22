@@ -4,7 +4,7 @@ Tags: notes, sticky-notes, dashboard, productivity, admin
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +81,9 @@ It stores note title, body, color, position, and the page path in a custom table
 The optional hide-notes preference uses `localStorage` in the user’s browser and never leaves that browser.
 
 == Changelog ==
+
+= 1.3.1 =
+* Pass WordPress.org Plugin Check: prepared SQL for the notes table, sanitized admin filters, and prefixed uninstall code.
 
 = 1.3.0 =
 * Require WordPress 6.5 or later.

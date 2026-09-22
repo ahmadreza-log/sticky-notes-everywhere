@@ -3,7 +3,7 @@
  * Plugin Name:       Sticky Notes Everywhere
  * Plugin URI:        https://github.com/ahmadreza-log/sticky-notes-everywhere
  * Description:       Private, draggable sticky notes on every frontend page and in wp-admin. Requires WordPress 6.5 or later.
- * Version:           1.3.0
+ * Version:           1.3.1
  * Requires at least: 6.5
  * Tested up to:      7.1
  * Requires PHP:      8.0
@@ -31,7 +31,7 @@ if (! defined('ABSPATH')) {
 }
 
 if (! defined('STNE_VERSION')) {
-    define('STNE_VERSION', '1.3.0');
+    define('STNE_VERSION', '1.3.1');
 }
 
 if (! defined('STNE_FILE')) {
@@ -95,7 +95,8 @@ register_activation_hook(__FILE__, 'stne_activate');
  */
 function stne_locale(): void
 {
-    load_plugin_textdomain(
+    // Bundled fa_IR ships in /languages. WordPress.org still auto-loads once hosted.
+    load_plugin_textdomain( // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound
         'sticky-notes-everywhere',
         false,
         dirname(plugin_basename(STNE_FILE)) . '/languages'
