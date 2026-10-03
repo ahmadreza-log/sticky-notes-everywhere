@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Plugin Name:       Sticky Notes Everywhere
- * Plugin URI:        https://github.com/ahmadreza-log/sticky-notes-everywhere
+ * Plugin URI:        https://wordpress.org/plugins/sticky-notes-everywhere
  * Description:       Private, draggable sticky notes on every frontend page and in wp-admin. Requires WordPress 6.5 or later.
  * Version:           1.3.1
  * Requires at least: 6.5
- * Tested up to:      7.1
  * Requires PHP:      8.0
  * Author:            Ahmadreza Ebrahimi
  * Author URI:        https://ahmadreza.me
